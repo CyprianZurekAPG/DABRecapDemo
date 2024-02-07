@@ -3,7 +3,8 @@
   "configurations": {
     "dabrecap-demo": {
       "appLocation": "app",
-      "outputLocation": "."
+      "outputLocation": ".",
+      "dataApiLocation": "swa-db-connections"
     }
   }
 }
