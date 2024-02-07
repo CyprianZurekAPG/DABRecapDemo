@@ -1,0 +1,1 @@
+DELETE  http://localhost:5000/rest/person/person_id/3

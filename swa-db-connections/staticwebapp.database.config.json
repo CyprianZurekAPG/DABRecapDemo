@@ -1,0 +1,119 @@
+{
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v0.10.23/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "Server=tcp:dabrecapdemo.database.windows.net,1433;Initial Catalog=dabrecapdemo;Persist Security Info=False;User ID=cyprianzurek;Password=dab123!@#;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "options": {
+      "set-session-context": false
+    }
+  },
+  "runtime": {
+    "rest": {
+      "enabled": true,
+      "path": "/rest",
+      "request-body-strict": true
+    },
+    "graphql": {
+      "enabled": true,
+      "path": "/graphql",
+      "allow-introspection": true
+    },
+    "host": {
+      "cors": {
+        "origins": [],
+        "allow-credentials": false
+      },
+      "authentication": {
+        "provider": "StaticWebApps"
+      },
+      "mode": "development"
+    }
+  },
+  "entities": {
+    "person": {
+      "source": {
+        "object": "dbo.person",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "person",
+          "plural": "people"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*"
+            }
+          ]
+        }
+      ]
+    },
+    "address": {
+      "source": {
+        "object": "dbo.address",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "address",
+          "plural": "addresses"
+        }
+      },
+      "rest": {
+        "enabled": true
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*"
+            }
+          ]
+        }
+      ]
+    },
+    "getPersonByPet": {
+      "source": {
+        "object": "dbo.get_person_by_pet",
+        "type": "stored-procedure",
+        "parameters": {
+          "pet": ""
+        }
+      },
+      "graphql": {
+        "enabled": true,
+        "operation": "query",
+        "type": {
+          "singular": "getPersonByPet",
+          "plural": "getPersonByPets"
+        }
+      },
+      "rest": {
+        "enabled": true,
+        "methods": [
+          "get"
+        ]
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
